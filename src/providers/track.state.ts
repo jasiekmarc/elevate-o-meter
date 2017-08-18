@@ -96,4 +96,11 @@ export class TrackService {
         }
         return ret;
     }
+
+    currentElevationGain(): number {
+        return this.currentPeaks().reduce((preEle, curPeak) => {
+            const curGain = curPeak.ele - this.minL[curPeak.index];
+            return preEle + curGain;
+        }, 0);
+    }
 }
