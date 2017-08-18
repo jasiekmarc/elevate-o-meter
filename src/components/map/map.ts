@@ -7,12 +7,12 @@ import * as L from 'leaflet';
     selector: 'map',
     template: `<div
         leaflet
-        class="pure-u-1"
+        class="mdl-cell mdl-cell--12-col"
         [leafletOptions]="options"
         [leafletLayersControl]="layersControl"
         [leafletLayers]="layers"
         [leafletFitBounds]="fitBounds"></div>`,
-    styles: ['div { height: 70vh; }'],
+    styles: ['div { height: 60vh; }'],
 })
 export class MapComponent {
     options = {
