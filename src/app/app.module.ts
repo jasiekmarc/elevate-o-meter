@@ -1,16 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { LeafletModule } from '@asymmetrik/angular2-leaflet';
+
 
 import { AppComponent } from './app.component';
+import { MapComponent } from '../components/map/map';
+
+import { TrackService } from "../providers/track.state";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    LeafletModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    TrackService,
+  ],
+  bootstrap: [
+    AppComponent,
+    MapComponent
+  ]
 })
 export class AppModule { }
