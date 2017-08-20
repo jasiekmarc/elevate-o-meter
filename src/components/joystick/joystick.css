@@ -1,7 +1,19 @@
 .add-peak-control {
     background-color: #fbc02d;
+    padding: 1rem;
 }
 
 .upload-file-control {
     background-color: #ec407a;
+}
+
+.mat-slider {
+    width: 100%;
+}
+
+label {
+    position: absolute;
+    top: 0;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: rgba(0, 0, 0, 0.38);
 }

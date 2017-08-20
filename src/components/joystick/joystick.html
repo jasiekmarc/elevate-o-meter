@@ -1,0 +1,29 @@
+<div fxFlex="66" class="add-peak-control">
+    <form (ngSubmit)="addPeak()" fxLayout="row">
+        <div fxFlex="80" fxLayoutAlign="space-around center">
+            <md-slider min="0" [max]="trackService.length()" value="0"
+                tabindex="0" name="be" [(ngModel)]="addPeakModel.be"
+                (ngModelChange)="beChanged()"
+                [disabled]="!this.layerService.active()">
+            </md-slider>
+            <md-slider min="0" [max]="trackService.length()" value="0"
+                tabindex="0" name="en" [(ngModel)]="addPeakModel.en"
+                (ngModelChange)="enChanged()"
+                [disabled]="!this.layerService.active()">
+            </md-slider>
+        </div>
+        <div fxFlex="20" fxLayoutAlign="space-around center">
+            <button md-raised-button color="accent" type="submit"
+                [disabled]="!this.layerService.active()">
+                <md-icon>add</md-icon> Add peak
+            </button>
+        </div>
+    </form>
+</div>
+
+<div fxFlex="34" class="upload-file-control" fxLayoutAlign="space-around center">
+    <button md-raised-button color="" (click)="gpxFileInput.click()">
+        <md-icon>file_upload</md-icon> Load GPX Track
+    </button>
+    <input hidden type="file" #gpxFileInput (change)="selectUploadedTrack($event)" accept=".gpx"/>
+</div>
