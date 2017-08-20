@@ -12,17 +12,23 @@ export class LayerService {
 
     trackGeoJSON: GeoJSON.LineString;
 
-    peakMarkers: number[];
+    peakMarkerAt: Map<number, number>;
 
     fitBounds: L.LatLngBounds = null;
 
     moveRangeFlags(be: number, en: number) {
         this.rangeBe = be;
         this.rangeEn = en;
+
+        (<L.Marker>this.layers[0]).setLatLng(this.coordinatesAtIndex(be));
+        (<L.Marker>this.layers[1]).setLatLng(this.coordinatesAtIndex(en-1));
     }
 
     addPeakFlag(ind: number, ele: number) {
-        this.peakMarkers.push(ind);
+        this.peakMarkerAt.set(ind, this.layers.length);
+        const marker = this.markerInLatLng(ind, 'terrain', 'orange');
+        marker.bindPopup(`Index: <b>${ind}</b><br>Altitude: <b>${ele}</b>`);
+        this.layers.push(marker);
     }
 
     active(): boolean {
@@ -30,9 +36,17 @@ export class LayerService {
     }
 
     loadTrack(track: GeoJSON.Feature<GeoJSON.LineString>) {
-        this.peakMarkers = [];
+        this.peakMarkerAt = new Map();
         this.trackGeoJSON = track.geometry;
-        this.moveRangeFlags(0, this.trackGeoJSON.coordinates.length);
+
+        this.layers.push(this.markerInLatLng(0, 'play', 'green'));
+        this.layers.push(this.markerInLatLng(
+            this.trackGeoJSON.coordinates.length-1, 'stop', 'red'));
+        this.layers.push(L.geoJSON(this.trackGeoJSON, {
+            style: (_) => {
+                return {color: '#03a9f4', weight: 4};
+            }
+        }));
     }
 
     private coordinatesAtIndex(ind: number): [number, number] {
@@ -52,15 +66,5 @@ export class LayerService {
         });
     }
 
-    layers(): L.Layer[] {
-        if (this.trackGeoJSON == null)
-            return [];
-        const layers = [
-            this.markerInLatLng(this.rangeBe, 'play', 'green'),
-            this.markerInLatLng(this.rangeEn-1, 'stop', 'red'),
-            L.geoJSON(this.trackGeoJSON),
-        ].concat(this.peakMarkers.map(ind =>
-            this.markerInLatLng(ind, 'terrain', 'yellow')));
-        return layers;
-    }
+    layers: L.Layer[] = [];
 }

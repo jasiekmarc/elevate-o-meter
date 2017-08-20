@@ -11,9 +11,9 @@
     color: #FFFFFF;
     text-align: center;
     text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    margin-top: 2rem;
 }
 
-.counter md-card-subtitle {
-    font-size: 1rem;
+.counter md-card-title {
     text-align: center;
 }

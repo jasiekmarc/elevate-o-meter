@@ -10,7 +10,7 @@ import * as L from 'leaflet';
         leaflet
         [leafletOptions]="options"
         [leafletLayersControl]="layersControl"
-        [leafletLayers]="layerService.layers()"
+        [leafletLayers]="layerService.layers"
         [leafletFitBounds]="layerService.fitBounds"></div>`,
     styles: ['div { height: 66vh; }'],
 })

@@ -12,7 +12,7 @@
     fxFlex="30"
     class="counter"
     [class]="trackService.alts==null ? 'nodisplay' : ''">
-    <md-card-subtitle>Current elevation estimate</md-card-subtitle>
+    <md-card-title>Current elevation gain estimate</md-card-title>
     <md-card-content class="card-content">
         {{ trackService.currentElevationGain() | number:'1.0-0' }} m.
     </md-card-content>

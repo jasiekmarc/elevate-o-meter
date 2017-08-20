@@ -14,7 +14,7 @@ interface ChartData {
 })
 export class ChartComponent {
     colorScheme = {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        domain: ['#03a9f4', '#FF5722', '#C7B42C', '#AAAAAA']
       };
 
     constructor(private trackService: TrackService) {}
