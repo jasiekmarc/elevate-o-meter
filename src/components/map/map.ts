@@ -12,7 +12,7 @@ import * as L from 'leaflet';
         [leafletLayersControl]="layersControl"
         [leafletLayers]="layerService.layers()"
         [leafletFitBounds]="layerService.fitBounds"></div>`,
-    styles: ['div { height: 60vh; }'],
+    styles: ['div { height: 66vh; }'],
 })
 export class MapComponent {
     options = {
