@@ -1,0 +1,19 @@
+<div fxFlex="70">
+    <ngx-charts-line-chart
+        [results]="trackService.chartData"
+        [scheme]="colorScheme"
+        yAxis='true'
+        yAxisLabel='Altitude'
+        yAxisLabel='true'
+        autoScale='true'>
+    </ngx-charts-line-chart>
+</div>
+<md-card
+    fxFlex="30"
+    class="counter"
+    [class]="trackService.alts==null ? 'nodisplay' : ''">
+    <md-card-subtitle>Current elevation estimate</md-card-subtitle>
+    <md-card-content class="card-content">
+        {{ trackService.currentElevationGain() | number:'1.0-0' }} m.
+    </md-card-content>
+</md-card>

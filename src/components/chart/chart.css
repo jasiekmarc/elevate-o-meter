@@ -1,0 +1,19 @@
+.counter {
+    background: #CDDC39;
+}
+
+.nodisplay {
+    display: none;
+}
+
+.counter md-card-content {
+    font-size: 3rem;
+    color: #FFFFFF;
+    text-align: center;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+
+.counter md-card-subtitle {
+    font-size: 1rem;
+    text-align: center;
+}
