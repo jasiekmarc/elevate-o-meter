@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { LinkedList } from "typescript-dotnet-umd/System/Collections/LinkedList";
-import { ILinkedListNode } from "typescript-dotnet-umd/System/Collections/ILinkedListNode";
+import { LinkedList } from "typescript-dotnet-commonjs/System/Collections/LinkedList";
+import { ILinkedListNode } from "typescript-dotnet-commonjs/System/Collections/ILinkedListNode";
 
 export interface Peak {
     index: number;
@@ -22,8 +22,9 @@ export class TrackService {
     /** Provided a GpxTrack object loads altitudes into  */
     loadTrack(feature: GeoJSON.Feature<GeoJSON.LineString>) {
         this.alts = feature.geometry.coordinates.map(wp => wp[2]);
-        this.extremePoints.add(0)
-        this.extremePoints.add(this.alts.length);
+
+        const endFlags: number[] = [0, this.alts.length];
+        this.extremePoints = new LinkedList<number>(endFlags);
 
         this.minL = new Array(this.alts.length);
         this.minR = new Array(this.alts.length);
@@ -49,7 +50,7 @@ export class TrackService {
             for (let i = it.value - 1; i >= it.previous.value; i --) {
                 curmin = Math.min(curmin, this.alts[i]);
                 this.minR[i] = curmin;
-                this.peakR[i] = it.value;
+                this.peakR[i] = it.value-1;
             }
         }
     }
@@ -65,7 +66,7 @@ export class TrackService {
     }
 
     addPeak(be: number, en: number): Peak {
-        let curmax: [number, number] = [1000000000, 1000000000];
+        let curmax: [number, number] = [0, 0];
         for (let i = be; i != en; i ++) {
             const cand = (this.alts[i] - this.minL[i]) +
                 (this.alts[this.peakR[i]] - this.minR[i]);
@@ -75,6 +76,7 @@ export class TrackService {
         }
         const ub = this.findUpperBound(curmax[1]);
         ub.addBefore(curmax[1]);
+        this.updateMins();
         return { index: curmax[1], ele: this.alts[curmax[1]] };
     }
 
@@ -95,6 +97,12 @@ export class TrackService {
             });
         }
         return ret;
+    }
+
+    length(): number {
+        if (this.alts == null)
+            return 1;
+        return this.alts.length;
     }
 
     currentElevationGain(): number {
