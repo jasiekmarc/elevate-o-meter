@@ -1,17 +1,17 @@
 import { Component, Input } from "@angular/core";
 
 import { TrackService } from "../../providers/track.state";
+import { LayerService } from "../../providers/layer.service";
 import * as L from 'leaflet';
 
 @Component({
     selector: 'map',
     template: `<div
         leaflet
-        class="mdl-cell mdl-cell--12-col"
         [leafletOptions]="options"
         [leafletLayersControl]="layersControl"
-        [leafletLayers]="layers"
-        [leafletFitBounds]="fitBounds"></div>`,
+        [leafletLayers]="layerService.layers()"
+        [leafletFitBounds]="layerService.fitBounds"></div>`,
     styles: ['div { height: 60vh; }'],
 })
 export class MapComponent {
@@ -23,7 +23,7 @@ export class MapComponent {
             })
         ],
         zoom: 5,
-        center: L.latLng([ 46.879966, -121.726909 ])
+        center: L.latLng([ 51, 17 ])
     };
 
     layersControl = {
@@ -33,12 +33,5 @@ export class MapComponent {
         }
     };
 
-    layers: L.Layer[] = [];
-
-    @Input()
-    set track(data: GeoJSON.FeatureCollection<GeoJSON.LineString>) {
-        this.layers = [L.geoJSON(data)];
-    }
-
-    fitBounds = this.layers.length > 0 ? this.layers : [[40.750, -78], [40.774, -74.125]];
+    constructor(private layerService: LayerService) {}
 }

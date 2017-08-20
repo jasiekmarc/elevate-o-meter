@@ -75,6 +75,8 @@ export class JoystickComponent {
             this.trackService.loadTrack(geoJson.features[0]);
             this.layerService.loadTrack(geoJson.features[0]);
             this.addPeakModel = {be: 0, en: this.trackService.length()};
+            this.layerService.fitBounds = L.geoJSON(
+                this.layerService.trackGeoJSON).getBounds();
         };
         reader.readAsText(fileList[0]);
     }

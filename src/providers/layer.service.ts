@@ -14,6 +14,8 @@ export class LayerService {
 
     peakMarkers: number[];
 
+    fitBounds: L.LatLngBounds = null;
+
     moveRangeFlags(be: number, en: number) {
         this.rangeBe = be;
         this.rangeEn = en;
