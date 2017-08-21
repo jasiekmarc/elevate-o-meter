@@ -17,5 +17,5 @@ export class ChartComponent {
         domain: ['#03a9f4', '#FF5722', '#C7B42C', '#AAAAAA']
       };
 
-    constructor(private trackService: TrackService) {}
+    constructor(public trackService: TrackService) {}
 }

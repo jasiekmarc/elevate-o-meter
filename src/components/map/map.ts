@@ -33,5 +33,5 @@ export class MapComponent {
         }
     };
 
-    constructor(private layerService: LayerService) {}
+    constructor(public layerService: LayerService) {}
 }

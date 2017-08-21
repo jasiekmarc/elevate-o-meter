@@ -31,8 +31,8 @@ export class JoystickComponent {
     addPeakModel: AddPeakModel = new AddPeakModel(0, 100);
     peakRange: [number, number] = [0, 15];
 
-    constructor(private trackService: TrackService,
-        private layerService: LayerService,
+    constructor(public trackService: TrackService,
+        public layerService: LayerService,
         public dialog: MdDialog,
         private appRef: ApplicationRef) {}
 
