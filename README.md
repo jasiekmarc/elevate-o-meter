@@ -1,28 +1,52 @@
-# ElevateOMeter
+# Elevate-O-Meter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.0.
+GPX recording apps like [Locus](http://www.locusmap.eu/) are great for hikers.
+They use GPS receivers in a phone to locate us on a good vector map downloaded
+and stored off-line and even allow to record the hike. After the trip they show
+a summary of the recorded track – usually the data like distance, average speed
+or elevation gain.
 
-## Development server
+## Estimating the elevation gain
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The estimation of the elevation gain is unfortunately often very imprecise.
+The GPS receiver can be off by around ten meters to either side and throught the
+day the differences coming from this imprecision can add-up to gigantic numbers.
+The apps like Locus try to solve the issue by apllying some smoothing to the
+altitude profile of the track, which is a generic way to treat data, not really
+helpful for this particular task.
 
-## Code scaffolding
+A human with a map in hand is usually better at estimating the altitude gain of
+a path then the apps. Our trips usually consist of a small number of peaks that
+are easy to identify. We can also find the lowest points between these peaks and
+sum the altitude differences.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The same thing could also be done by the app, if it only could read the map.
+Unfortunately, the map is just a picture, the app does not really _understand_
+it. We could however help the app by telling it **how many peaks** there were
+in the trip. The app should be able to find these peaks in the track profile.
 
-## Build
+# Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+That is essentially what our app is doing. We tell it to find peak after peak
+and it should find them. Once the peak is identified, it is shown on the map,
+in the new (estimated) profile, and counted in to the elevation gain estimation.
 
-## Running unit tests
+## Step one: Load the track
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The track must be in GPX and only contain one path.
 
-## Running end-to-end tests
+## Identifying the peaks
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+By clicking the `Add peak` button, we invoke a search. The new peak will be
+immediately presented on the map.
 
-## Further help
+## Removing wrongly identified peaks
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Sometimes we might not agree with a peak that the app thinks it found in the
+track profile. By clicking in the marker and `Delete` button, we can remove the
+peak.
+
+## Limiting the peak search range
+
+If the app is not able to find the peak, that we can see ourselves, the sliders
+allow us to limit the part of the track where the search should be performed.
