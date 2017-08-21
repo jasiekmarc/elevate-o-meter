@@ -8,12 +8,12 @@
         autoScale='true'>
     </ngx-charts-line-chart>
 </div>
-<md-card
+<div
     fxFlex="30"
     class="counter"
     [class]="trackService.alts==null ? 'nodisplay' : ''">
-    <md-card-title>Current elevation gain estimate</md-card-title>
-    <md-card-content class="card-content">
+    <h2 class="title">Current elevation gain estimate</h2>
+    <div class="card-content">
         {{ trackService.currentElevationGain() | number:'1.0-0' }} m.
-    </md-card-content>
-</md-card>
+    </div>
+</div>

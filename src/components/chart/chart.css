@@ -1,12 +1,13 @@
 .counter {
     background: #CDDC39;
+    padding: 1rem;
 }
 
 .nodisplay {
     display: none;
 }
 
-.counter md-card-content {
+.card-content {
     font-size: 3rem;
     color: #FFFFFF;
     text-align: center;
@@ -14,6 +15,7 @@
     margin-top: 2rem;
 }
 
-.counter md-card-title {
+.counter .title {
     text-align: center;
+    color: #607d8b;
 }
