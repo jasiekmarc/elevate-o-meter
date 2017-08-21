@@ -19,11 +19,19 @@ import {
 
 import { AppComponent } from './app.component';
 import { MapComponent } from '../components/map/map';
-import { JoystickComponent } from '../components/joystick/joystick';
+import {
+  JoystickComponent,
+  FileUploadErrorDialog,
+  GpxParseErrorDialog
+} from '../components/joystick/joystick';
 import { ChartComponent } from "../components/chart/chart";
 
 import { TrackService } from "../providers/track.state";
-import { LayerService } from "../providers/layer.service";
+import {
+  LayerService,
+  PeakPopupComponent,
+  CustomCompileService
+} from "../providers/layer.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +39,9 @@ import { LayerService } from "../providers/layer.service";
     MapComponent,
     JoystickComponent,
     ChartComponent,
+    FileUploadErrorDialog,
+    GpxParseErrorDialog,
+    PeakPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -48,12 +59,18 @@ import { LayerService } from "../providers/layer.service";
     MdSliderModule,
   ],
   providers: [
+    CustomCompileService,
     TrackService,
     LayerService,
   ],
   bootstrap: [
     AppComponent,
     MapComponent
+  ],
+  entryComponents: [
+    FileUploadErrorDialog,
+    GpxParseErrorDialog,
+    PeakPopupComponent,
   ]
 })
 export class AppModule { }

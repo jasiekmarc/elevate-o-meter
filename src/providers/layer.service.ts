@@ -1,7 +1,44 @@
-import { Injectable } from "@angular/core";
+import {
+    Component,
+    Injectable,
+    Injector,
+    ApplicationRef,
+    ComponentFactoryResolver,
+} from "@angular/core";
 import * as L from "leaflet";
 import "drmonty-leaflet-awesome-markers";
 
+import { TrackService } from "./track.state";
+
+@Injectable()
+export class CustomCompileService {
+
+    private appRef: ApplicationRef;
+
+    constructor(
+        private injector: Injector,
+        private resolver: ComponentFactoryResolver
+    ) { }
+
+    configure(appRef) {
+        this.appRef = appRef;
+    }
+
+    compile(component, onAttach) {
+        const compFactory = this.resolver.resolveComponentFactory(component);
+        let compRef = compFactory.create(this.injector);
+
+        if (onAttach)
+            onAttach(compRef);
+
+        this.appRef.attachView(compRef.hostView);
+        compRef.onDestroy(() => this.appRef.detachView(compRef.hostView));
+
+        let div = document.createElement('div');
+        div.appendChild(compRef.location.nativeElement);
+        return div;
+    }
+}
 
 @Injectable()
 export class LayerService {
@@ -15,6 +52,13 @@ export class LayerService {
     peakMarkerAt: Map<number, number>;
 
     fitBounds: L.LatLngBounds = null;
+    layers: L.Layer[] = [];
+
+    appRef: ApplicationRef;
+
+    constructor(public compileService: CustomCompileService) {
+        compileService.configure(ApplicationRef);
+    }
 
     moveRangeFlags(be: number, en: number) {
         this.rangeBe = be;
@@ -27,8 +71,18 @@ export class LayerService {
     addPeakFlag(ind: number, ele: number) {
         this.peakMarkerAt.set(ind, this.layers.length);
         const marker = this.markerInLatLng(ind, 'terrain', 'orange');
-        marker.bindPopup(`Index: <b>${ind}</b><br>Altitude: <b>${ele}</b>`);
+        marker.bindPopup(null).setPopupContent(
+            this.compileService.compile(
+                PeakPopupComponent, (c) => {
+                    c.instance.index = ind;
+                    c.instance.ele = ele;
+                }));
         this.layers.push(marker);
+    }
+
+    removePeakFlag(ind: number) {
+        this.layers[this.peakMarkerAt.get(ind)].remove();
+        console.log(this.layers[this.peakMarkerAt.get(ind)]);
     }
 
     active(): boolean {
@@ -36,6 +90,8 @@ export class LayerService {
     }
 
     loadTrack(track: GeoJSON.Feature<GeoJSON.LineString>) {
+        this.layers.forEach(l => l.remove());
+        this.layers.length = 0;
         this.peakMarkerAt = new Map();
         this.trackGeoJSON = track.geometry;
 
@@ -65,6 +121,34 @@ export class LayerService {
             })
         });
     }
+}
 
-    layers: L.Layer[] = [];
+@Component({
+    template: `
+    <div>
+        <p>Index: <strong>{{ index }}</strong><br>
+        Altitude: <strong>{{ ele }}</strong></p>
+        <button
+            md-button
+            color="warn"
+            (click)="deletePeak()">
+            <md-icon>delete</md-icon>
+            Delete
+        </button>
+    </div>
+    `,
+})
+export class PeakPopupComponent {
+    index: number
+    ele: number
+
+    constructor(
+        private layerService: LayerService,
+        private trackService: TrackService) {}
+
+    deletePeak() {
+        console.log('Peak number', this.index, 'should be deleted');
+        this.trackService.removePeak(this.index);
+        this.layerService.removePeakFlag(this.index);
+    }
 }

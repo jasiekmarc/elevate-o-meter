@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ApplicationRef } from "@angular/core";
 import { FormsModule }   from '@angular/forms';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import * as tj from "@mapbox/togeojson";
@@ -33,7 +33,12 @@ export class JoystickComponent {
 
     constructor(private trackService: TrackService,
         private layerService: LayerService,
-        public dialog: MdDialog) {}
+        public dialog: MdDialog,
+        private appRef: ApplicationRef) {}
+
+    ngOnInit() {
+        this.layerService.compileService.configure(this.appRef);
+    }
 
     beChanged() {
         this.addPeakModel.en = Math.max(this.addPeakModel.be,
@@ -83,11 +88,13 @@ export class JoystickComponent {
 }
 
 @Component({
-    template: '<p>Exactly one GPX file should be uploaded</p>'
+    selector: 'file-upload-error-dialog',
+    template: '<p>Uploading the GPX file failed.</p>'
 })
-class FileUploadErrorDialog {}
+export class FileUploadErrorDialog {}
 
 @Component({
-    template: '<p>The GPX file should contain at least one track</p>'
+    selector: 'gpx-parse-error-dialog',
+    template: '<p>The GPX file parsing did not succeed.</p>'
 })
-class GpxParseErrorDialog {}
+export class GpxParseErrorDialog {}

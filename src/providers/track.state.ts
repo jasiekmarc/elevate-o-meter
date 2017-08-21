@@ -135,6 +135,8 @@ export class TrackService {
     removePeak(pos: number) {
         const el = this.findUpperBound(pos);
         el.remove();
+        this.updateMins();
+        this.updateChart();
     }
 
     /** Shows the current list of peaks with their altitudes */
