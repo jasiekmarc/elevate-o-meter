@@ -19,3 +19,8 @@
     text-align: center;
     color: #607d8b;
 }
+
+.plot-wrapper {
+    padding-top: 1rem;
+    padding-right: 3rem;
+}

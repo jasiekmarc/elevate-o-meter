@@ -23,8 +23,8 @@ export class TrackService {
     peakR: Array<number>
 
     // For charts
-    sparseAlts: Array<{name: number, value: number}>;
-    chartData: ChartData[] = [];
+    altsChartData: Array<{name: number, value: number}> = [];
+    compChartData: Array<{name: number, value: number}> = [];
 
     constructor() {}
 
@@ -42,7 +42,7 @@ export class TrackService {
 
         this.updateMins();
 
-        this.sparseAlts = this.alts.map((val, ind) => {
+        this.altsChartData = this.alts.map((val, ind) => {
             return {
                 name: ind,
                 value: val,
@@ -60,7 +60,7 @@ export class TrackService {
                 }
                 this.minL[i] = curind;
                 this.peakL[i] = it.value;
-            }
+            };
         }
 
         for (let it = this.peaks.last; it.previous != null;
@@ -77,21 +77,12 @@ export class TrackService {
     }
 
     private updateChart() {
-        this.chartData = [
-            {
-                name: 'GPX recording',
-                series: this.sparseAlts,
-            },
-            {
-                name: 'Computed profile',
-                series: this.currentExtremePoints().map(peak => {
-                    return {
-                        name: peak.index,
-                        value: peak.ele,
-                    }
-                }),
+        this.compChartData = this.currentExtremePoints().map(peak => {
+            return {
+                name: peak.index,
+                value: peak.ele,
             }
-        ];
+        });
     }
 
     /**

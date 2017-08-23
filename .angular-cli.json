@@ -26,9 +26,13 @@
       "styles": [
         "styles.css",
         "../node_modules/leaflet/dist/leaflet.css",
-        "../node_modules/drmonty-leaflet-awesome-markers/css/leaflet.awesome-markers.css"
+        "../node_modules/drmonty-leaflet-awesome-markers/css/leaflet.awesome-markers.css",
+        "../node_modules/plottable/plottable.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/d3/build/d3.js",
+        "../node_modules/plottable/plottable.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

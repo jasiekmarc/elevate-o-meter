@@ -3,7 +3,6 @@ import { FormsModule }   from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeafletModule } from '@asymmetrik/angular2-leaflet';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -24,7 +23,7 @@ import {
   FileUploadErrorDialog,
   GpxParseErrorDialog
 } from '../components/joystick/joystick';
-import { ChartComponent } from "../components/chart/chart";
+import { ChartComponent, PlottablePlot } from "../components/chart/chart";
 
 import { TrackService } from "../providers/track.state";
 import {
@@ -38,6 +37,7 @@ import {
     AppComponent,
     MapComponent,
     JoystickComponent,
+    PlottablePlot,
     ChartComponent,
     FileUploadErrorDialog,
     GpxParseErrorDialog,
@@ -48,7 +48,6 @@ import {
     FormsModule,
     BrowserAnimationsModule,
     LeafletModule.forRoot(),
-    NgxChartsModule,
 
     // Material Components
     FlexLayoutModule,

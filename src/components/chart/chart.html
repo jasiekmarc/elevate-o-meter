@@ -1,12 +1,13 @@
-<div fxFlex="70">
-    <ngx-charts-line-chart
-        [results]="trackService.chartData"
-        [scheme]="colorScheme"
-        yAxis='true'
-        yAxisLabel='Altitude'
-        yAxisLabel='true'
-        autoScale='true'>
-    </ngx-charts-line-chart>
+<div
+    fxFlex="70"
+    class="plot-wrapper"
+    [class]="trackService.alts==null ? 'nodisplay' : ''">
+    <div fxFlex [class]="trackService.alts==null ? 'nodisplay' : ''">
+        <plottable
+            [orig-data]="trackService.altsChartData"
+            [comp-data]="trackService.compChartData">
+        </plottable>
+    </div>
 </div>
 <div
     fxFlex="30"
