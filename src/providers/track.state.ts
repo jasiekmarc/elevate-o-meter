@@ -146,17 +146,21 @@ export class TrackService {
 
     /** Returns the current list of extreme points with their altitudes. */
     currentExtremePoints(): Array<Peak> {
-        let ret = [{ index: 0, ele: this.alts[0] }];
+        let ret = [];
         for (let it = this.peaks.first; it.next != null; it = it.next) {
             ret.push({
-                index: this.minL[it.next.value-1],
-                ele: this.alts[this.minL[it.next.value-1]],
+                index: it.value,
+                ele: this.alts[it.value]
             });
             ret.push({
-                index: it.next.value-1,
-                ele: this.alts[it.next.value-1]
+                index: this.minR[it.value],
+                ele: this.alts[this.minR[it.value]],
             });
         }
+        ret.push({
+            index: this.peaks.lastValue - 1,
+            ele: this.alts[this.peaks.lastValue-1],
+        });
         return ret;
     }
 
