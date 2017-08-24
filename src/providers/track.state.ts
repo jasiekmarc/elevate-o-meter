@@ -9,7 +9,7 @@ interface Peak {
 
 interface ChartData {
     name: string;
-    series: {name: number, value: number}[];
+    series: { name: number, value: number }[];
 }
 
 @Injectable()
@@ -23,10 +23,8 @@ export class TrackService {
     peakR: Array<number>
 
     // For charts
-    altsChartData: Array<{name: number, value: number}> = [];
-    compChartData: Array<{name: number, value: number}> = [];
-
-    constructor() {}
+    altsChartData: Array<{ name: number, value: number }> = [];
+    compChartData: Array<{ name: number, value: number }> = [];
 
     /** Provided a GpxTrack object loads altitudes into  */
     loadTrack(feature: GeoJSON.Feature<GeoJSON.LineString>) {
@@ -54,7 +52,7 @@ export class TrackService {
     private updateMins() {
         for (let it = this.peaks.first; it.next != null; it = it.next) {
             let curind = it.value;
-            for (let i = it.value; i != it.next.value; i ++) {
+            for (let i = it.value; i != it.next.value; i++) {
                 if (this.alts[i] < this.alts[curind]) {
                     curind = i;
                 }
@@ -64,9 +62,9 @@ export class TrackService {
         }
 
         for (let it = this.peaks.last; it.previous != null;
-             it = it.previous) {
+            it = it.previous) {
             let curind = it.value - 1;
-            for (let i = it.value - 1; i >= it.previous.value; i --) {
+            for (let i = it.value - 1; i >= it.previous.value; i--) {
                 if (this.alts[i] < this.alts[curind]) {
                     curind = i;
                 }
@@ -98,12 +96,12 @@ export class TrackService {
     private gainWithPeakAtInd(ind: number): number {
         return this.alts[ind] - this.alts[this.minL[ind]] +
             this.alts[this.peakR[ind]] - this.alts[this.minR[ind]] -
-            (this.alts[this.peakR[ind]] - this.alts[this.minL[this.peakR[ind]-1]]);
+            (this.alts[this.peakR[ind]] - this.alts[this.minL[this.peakR[ind] - 1]]);
     }
 
     addPeak(be: number, en: number): Peak {
         let bestInd = 0, bestVal = -1000;
-        for (let i = be; i != en; i ++) {
+        for (let i = be; i != en; i++) {
             const cand = this.gainWithPeakAtInd(i);
             if (cand > bestVal) {
                 bestVal = cand, bestInd = i;
@@ -135,7 +133,7 @@ export class TrackService {
         let ret = new Array();
 
         for (let it = this.peaks.first.next; it.next != null;
-             it = it.next) {
+            it = it.next) {
             ret.push({
                 index: it.value,
                 ele: this.alts[it.value],
@@ -159,7 +157,7 @@ export class TrackService {
         }
         ret.push({
             index: this.peaks.lastValue - 1,
-            ele: this.alts[this.peaks.lastValue-1],
+            ele: this.alts[this.peaks.lastValue - 1],
         });
         return ret;
     }
@@ -174,8 +172,8 @@ export class TrackService {
         if (this.alts == null) { return 0; }
         let sum = 0;
         for (let it = this.peaks.first; it.next != null; it = it.next) {
-            sum += this.alts[it.next.value-1] -
-                this.alts[this.minL[it.next.value-1]];
+            sum += this.alts[it.next.value - 1] -
+                this.alts[this.minL[it.next.value - 1]];
         }
         return sum;
     }

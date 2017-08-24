@@ -23,7 +23,7 @@ export class MapComponent {
             })
         ],
         zoom: 5,
-        center: L.latLng([ 51, 17 ])
+        center: L.latLng([51, 17])
     };
 
     layersControl = {
@@ -33,5 +33,5 @@ export class MapComponent {
         }
     };
 
-    constructor(public layerService: LayerService) {}
+    constructor(public layerService: LayerService) { }
 }

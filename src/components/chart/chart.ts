@@ -12,7 +12,7 @@ import {
 
 interface ChartData {
     name: string;
-    series: {name: number, value: number}[];
+    series: { name: number, value: number }[];
 }
 
 @Component({
@@ -21,14 +21,8 @@ interface ChartData {
     styleUrls: ['chart.css'],
 })
 export class ChartComponent {
-    colorScheme = {
-        domain: ['#03a9f4', '#FF5722', '#C7B42C', '#AAAAAA']
-      };
-
-
-
     constructor(public trackService: TrackService,
-                public layerService: LayerService) {
+        public layerService: LayerService) {
     }
 }
 
@@ -41,7 +35,7 @@ export class ChartComponent {
     </div>`,
 })
 export class PlottablePlot {
-    @Input('orig-data') set origData(data: {name: number, value: number}[]) {
+    @Input('orig-data') set origData(data: { name: number, value: number }[]) {
         this.origDataSet.data(data);
         this.xScale.domainMin(0);
         this.xScale.domainMax(data.length);
@@ -54,8 +48,8 @@ export class PlottablePlot {
     }
 
     @Input('range-flags') set flagBe(poss: [number, number]) {
-        this.rangeFlagsDataSet.data([{be: 0, en: poss[0]},
-            {be: poss[1], en: this.xScale.domainMax()}]);
+        this.rangeFlagsDataSet.data([{ be: 0, en: poss[0] },
+        { be: poss[1], en: this.xScale.domainMax() }]);
     }
 
     @Input('hover-peak') set hoverPeak(peak: number) {

@@ -1,5 +1,5 @@
 import { Component, ApplicationRef } from "@angular/core";
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import * as tj from "@mapbox/togeojson";
 
@@ -7,19 +7,19 @@ import { TrackService } from "../../providers/track.state";
 import { LayerService } from "../../providers/layer.service";
 
 interface FileReaderEventTarget extends EventTarget {
-    result:string
+    result: string
 }
 
 interface FileReaderEvent extends Event {
     target: FileReaderEventTarget;
-    getMessage():string;
+    getMessage(): string;
 }
 
 class AddPeakModel {
     constructor(
         public be: number,
         public en: number,
-    ) {}
+    ) { }
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class JoystickComponent {
     constructor(public trackService: TrackService,
         public layerService: LayerService,
         public dialog: MdDialog,
-        private appRef: ApplicationRef) {}
+        private appRef: ApplicationRef) { }
 
     ngOnInit() {
         this.layerService.compileService.configure(this.appRef);
@@ -79,7 +79,7 @@ export class JoystickComponent {
             }
             this.trackService.loadTrack(geoJson.features[0]);
             this.layerService.loadTrack(geoJson.features[0]);
-            this.addPeakModel = {be: 0, en: this.trackService.length()};
+            this.addPeakModel = { be: 0, en: this.trackService.length() };
             this.layerService.fitBounds = L.geoJSON(
                 this.layerService.trackGeoJSON).getBounds();
         };
@@ -91,10 +91,10 @@ export class JoystickComponent {
     selector: 'file-upload-error-dialog',
     template: '<p>Uploading the GPX file failed.</p>'
 })
-export class FileUploadErrorDialog {}
+export class FileUploadErrorDialog { }
 
 @Component({
     selector: 'gpx-parse-error-dialog',
     template: '<p>The GPX file parsing did not succeed.</p>'
 })
-export class GpxParseErrorDialog {}
+export class GpxParseErrorDialog { }

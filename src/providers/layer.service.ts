@@ -67,7 +67,7 @@ export class LayerService {
         this.rangeEn = en;
 
         (<L.Marker>this.layers[0]).setLatLng(this.coordinatesAtIndex(be));
-        (<L.Marker>this.layers[1]).setLatLng(this.coordinatesAtIndex(en-1));
+        (<L.Marker>this.layers[1]).setLatLng(this.coordinatesAtIndex(en - 1));
     }
 
     addPeakFlag(ind: number, ele: number) {
@@ -103,10 +103,10 @@ export class LayerService {
 
         this.layers.push(this.markerInLatLng(0, 'play', 'green'));
         this.layers.push(this.markerInLatLng(
-            this.trackGeoJSON.coordinates.length-1, 'stop', 'red'));
+            this.trackGeoJSON.coordinates.length - 1, 'stop', 'red'));
         this.layers.push(L.geoJSON(this.trackGeoJSON, {
             style: (_) => {
-                return {color: '#03a9f4', weight: 4};
+                return { color: '#03a9f4', weight: 4 };
             }
         }));
     }
@@ -120,7 +120,7 @@ export class LayerService {
 
     private markerInLatLng(index: number, name: string, color: string): L.Marker {
         return L.marker(this.coordinatesAtIndex(index), {
-            icon:  L.AwesomeMarkers.icon({
+            icon: L.AwesomeMarkers.icon({
                 prefix: 'mdi',
                 icon: name,
                 markerColor: color,
@@ -150,7 +150,7 @@ export class PeakPopupComponent {
 
     constructor(
         private layerService: LayerService,
-        private trackService: TrackService) {}
+        private trackService: TrackService) { }
 
     deletePeak() {
         console.log('Peak number', this.index, 'should be deleted');
