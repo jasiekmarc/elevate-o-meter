@@ -47,6 +47,8 @@ export class LayerService {
     rangeBe: number;
     rangeEn: number;
 
+    hoveredPeakMarker: [number, number];
+
     trackGeoJSON: GeoJSON.LineString;
 
     peakMarkerAt: Map<number, number>;
@@ -76,7 +78,11 @@ export class LayerService {
                 PeakPopupComponent, (c) => {
                     c.instance.index = ind;
                     c.instance.ele = ele;
-                }));
+                })).on('mouseover', (_) => {
+                    this.hoveredPeakMarker = [ind, ele];
+                }).on('mouseout', (_) => {
+                    this.hoveredPeakMarker = null;
+                });
         this.layers.push(marker);
     }
 

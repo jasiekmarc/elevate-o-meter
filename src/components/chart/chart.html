@@ -5,7 +5,8 @@
         <plottable
             [orig-data]="trackService.altsChartData"
             [comp-data]="trackService.compChartData"
-            [range-flags]="[layerService.rangeBe, layerService.rangeEn]">
+            [range-flags]="[layerService.rangeBe, layerService.rangeEn]"
+            [hover-peak]="layerService.hoveredPeakMarker">
         </plottable>
     </div>
 </div>
