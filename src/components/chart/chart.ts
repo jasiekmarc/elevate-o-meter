@@ -1,6 +1,7 @@
 import { Component, Input, HostListener } from "@angular/core";
 
 import { TrackService } from "../../providers/track.state";
+import { LayerService } from "../../providers/layer.service";
 import {
     Axes,
     Components,
@@ -26,7 +27,8 @@ export class ChartComponent {
 
 
 
-    constructor(public trackService: TrackService) {
+    constructor(public trackService: TrackService,
+                public layerService: LayerService) {
     }
 }
 
@@ -39,13 +41,21 @@ export class ChartComponent {
     </div>`,
 })
 export class PlottablePlot {
-    @Input('orig-data') set origData(data: any[]) {
+    @Input('orig-data') set origData(data: {name: number, value: number}[]) {
         this.origDataSet.data(data);
         this.xScale.domainMin(0);
+        this.xScale.domainMax(data.length);
+        this.yScale.domainMin(Math.min(...data.map((d) => d.value)));
         this.table.renderTo('div#plot');
+        this.table.redraw();
     }
     @Input('comp-data') set compData(data: any[]) {
         this.compDataSet.data(data);
+    }
+
+    @Input('range-flags') set flagBe(poss: [number, number]) {
+        this.rangeFlagsDataSet.data([{be: 0, en: poss[0]},
+            {be: poss[1], en: this.xScale.domainMax()}]);
     }
 
     xScale = new Scales.Linear();
@@ -55,7 +65,7 @@ export class PlottablePlot {
     yAxis = new Axes.Numeric(this.yScale, 'left');
 
     origDataSet = new Dataset();
-    origPlot = new Plots.Line().addDataset(this.origDataSet)
+    origPlot = new Plots.Area().addDataset(this.origDataSet)
         .x((d) => +d.name, this.xScale)
         .y((d) => +d.value, this.yScale)
         .attr('fill', '#81d4fa')
@@ -65,11 +75,20 @@ export class PlottablePlot {
     compPlot = new Plots.Line().addDataset(this.compDataSet)
         .x((d) => +d.name, this.xScale)
         .y((d) => +d.value, this.yScale)
-        .attr('stroke', '#FF5722')
+        .attr('stroke', '#FF5722');
 
-    plots = new Components.Group([this.origPlot, this.compPlot]);
-    table = new Components.Table([[this.yAxis, this.plots],
-                                  [null,       this.xAxis]]);
+    rangeFlagsDataSet = new Dataset();
+    rangePlot = new Plots.Rectangle().addDataset(this.rangeFlagsDataSet)
+        .x((d) => d.be, this.xScale)
+        .x2((d) => d.en)
+        .y((_) => 0)
+        .y2((_) => this.rangePlot.height())
+        .attr('fill', '#b0bec5')
+        .attr('stroke', '#78909c')
+        .attr("opacity", 0.3);
+
+    plots = new Components.Group([this.origPlot, this.compPlot, this.rangePlot]);
+    table = new Components.Table([[this.yAxis, this.plots]]);
 
     @HostListener('window:resize')
     onWindowResize() {

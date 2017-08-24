@@ -1,11 +1,11 @@
 <div
     fxFlex="70"
-    class="plot-wrapper"
-    [class]="trackService.alts==null ? 'nodisplay' : ''">
-    <div fxFlex [class]="trackService.alts==null ? 'nodisplay' : ''">
+    class="plot-wrapper">
+    <div fxFlex [hidden]="trackService.alts==null">
         <plottable
             [orig-data]="trackService.altsChartData"
-            [comp-data]="trackService.compChartData">
+            [comp-data]="trackService.compChartData"
+            [range-flags]="[layerService.rangeBe, layerService.rangeEn]">
         </plottable>
     </div>
 </div>
