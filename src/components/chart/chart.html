@@ -1,7 +1,6 @@
 <div fxFlex="70" class="plot-wrapper">
   <div fxFlex [hidden]="trackService.alts==null">
-    <app-plottable [orig-data]="trackService.altsChartData" [comp-data]="trackService.compChartData" [range-flags]="[layerService.rangeBe, layerService.rangeEn]"
-      [hover-peak]="layerService.hoveredPeakMarker">
+    <app-plottable [orig-data]="trackService.altsChartData" [comp-data]="trackService.compChartData" [range-flags]="[layerService.rangeBe, layerService.rangeEn]">
     </app-plottable>
   </div>
 </div>

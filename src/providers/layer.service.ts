@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import * as L from 'leaflet';
 import '../../node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js';
+import { Dataset } from 'plottable';
 
 import { TrackService } from './track.state';
 
@@ -48,7 +49,7 @@ export class LayerService {
   rangeBe: number;
   rangeEn: number;
 
-  hoveredPeakMarker: [number, number];
+  public hoverPeakDataSet: Dataset;
 
   trackGeoJSON: GeoJSON.LineString;
 
@@ -61,6 +62,7 @@ export class LayerService {
 
   constructor(public compileService: CustomCompileService) {
     compileService.configure(ApplicationRef);
+    this.hoverPeakDataSet = new Dataset();
   }
 
   moveRangeFlags(be: number, en: number) {
@@ -69,6 +71,10 @@ export class LayerService {
 
     (<L.Marker>this.layers[0]).setLatLng(this.coordinatesAtIndex(be));
     (<L.Marker>this.layers[1]).setLatLng(this.coordinatesAtIndex(en - 1));
+  }
+
+  setHoverPeak(ind: number, ele: number) {
+    this.hoverPeakDataSet.data([[ind, ele]]);
   }
 
   addPeakFlag(ind: number, ele: number) {
@@ -80,10 +86,9 @@ export class LayerService {
           c.instance.index = ind;
           c.instance.ele = ele;
         })).on('mouseover', (_) => {
-          this.hoveredPeakMarker = [ind, ele];
-          console.log('Hovered peak No.', ind);
+          this.setHoverPeak(ind, ele);
         }).on('mouseout', (_) => {
-          this.hoveredPeakMarker = null;
+          this.setHoverPeak(-1, -1);
         });
     this.layers.push(marker);
   }

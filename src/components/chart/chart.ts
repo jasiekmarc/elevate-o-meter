@@ -35,8 +35,7 @@ export class ChartComponent {
     <div
         id="plot"
         class="plottable">
-    </div>
-    <div><span>{{hoverPeak}}</span></div>`,
+    </div>`
 })
 export class PlottablePlotComponent {
   @Input('orig-data') set origData(data: { name: number, value: number }[]) {
@@ -56,22 +55,6 @@ export class PlottablePlotComponent {
     { be: poss[1], en: this.xScale.domainMax() }]);
   }
 
-  @Input('hover-peak') set hoverPeak(peak: [number, number]) {
-    console.log('Hovered peak No.', peak);
-    if (peak == null) {
-      this.hoverPeakDataSet.data([]);
-    } else {
-      this.hoverPeakDataSet.data([peak]);
-    }
-  }
-
-  get hoverPeak(): [number, number] {
-    if (this.hoverPeakDataSet.data.length === 0) {
-      return [-1, -1];
-    }
-    return this.hoverPeakDataSet.data[0];
-  }
-
   private origDataSet: Dataset;
   private compDataSet: Dataset;
   private rangeFlagsDataSet: Dataset;
@@ -81,8 +64,7 @@ export class PlottablePlotComponent {
   private xScale: Scales.Linear;
   private yScale: Scales.Linear;
 
-
-  constructor() {
+  constructor(public layerService: LayerService) {
     this.xScale = new Scales.Linear();
     this.yScale = new Scales.Linear().tickGenerator(
       Scales.TickGenerators.integerTickGenerator());
@@ -112,8 +94,7 @@ export class PlottablePlotComponent {
       .attr('stroke', '#78909c')
       .attr('opacity', 0.3);
 
-    this.hoverPeakDataSet = new Dataset();
-    const hoverPeakPlot = new Plots.Scatter().addDataset(this.hoverPeakDataSet)
+    const hoverPeakPlot = new Plots.Scatter().addDataset(layerService.hoverPeakDataSet)
       .x((d) => d[0], this.xScale)
       .y((d) => d[1], this.yScale)
       .size(30)
