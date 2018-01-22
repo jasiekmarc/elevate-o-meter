@@ -1,21 +1,13 @@
-<div
-    fxFlex="70"
-    class="plot-wrapper">
-    <div fxFlex [hidden]="trackService.alts==null">
-        <plottable
-            [orig-data]="trackService.altsChartData"
-            [comp-data]="trackService.compChartData"
-            [range-flags]="[layerService.rangeBe, layerService.rangeEn]"
-            [hover-peak]="layerService.hoveredPeakMarker">
-        </plottable>
-    </div>
+<div fxFlex="70" class="plot-wrapper">
+  <div fxFlex [hidden]="trackService.alts==null">
+    <plottable [orig-data]="trackService.altsChartData" [comp-data]="trackService.compChartData" [range-flags]="[layerService.rangeBe, layerService.rangeEn]"
+      [hover-peak]="layerService.hoveredPeakMarker">
+    </plottable>
+  </div>
 </div>
-<div
-    fxFlex="30"
-    class="counter"
-    [class]="trackService.alts==null ? 'nodisplay' : ''">
-    <h2 class="title">Current elevation gain estimate</h2>
-    <div class="card-content">
-        {{ trackService.currentElevationGain() | number:'1.0-0' }} m.
-    </div>
+<div fxFlex="30" id="counter" [class]="trackService.alts==null ? 'nodisplay' : ''">
+  <h2 class="title">Current elevation gain estimate</h2>
+  <div class="card-content">
+    {{ trackService.currentElevationGain() | number:'1.0-0' }} m.
+  </div>
 </div>

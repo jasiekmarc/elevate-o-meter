@@ -1,4 +1,4 @@
-.counter {
+#counter {
     background: #CDDC39;
     padding: 1rem;
 }
@@ -15,7 +15,7 @@
     margin-top: 2rem;
 }
 
-.counter .title {
+#counter .title {
     text-align: center;
     color: #607d8b;
 }

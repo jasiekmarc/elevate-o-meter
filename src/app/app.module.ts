@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LeafletModule } from '@asymmetrik/angular2-leaflet';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-  MdButtonModule,
-  MdCardModule,
-  MdDialogModule,
-  MdIconModule,
-  MdSliderModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatIconModule,
+  MatSliderModule,
 } from '@angular/material';
 
 
@@ -23,14 +23,14 @@ import {
   FileUploadErrorDialog,
   GpxParseErrorDialog
 } from '../components/joystick/joystick';
-import { ChartComponent, PlottablePlot } from "../components/chart/chart";
+import { ChartComponent, PlottablePlot } from '../components/chart/chart';
 
-import { TrackService } from "../providers/track.state";
+import { TrackService } from '../providers/track.state';
 import {
   LayerService,
   PeakPopupComponent,
   CustomCompileService
-} from "../providers/layer.service";
+} from '../providers/layer.service';
 
 @NgModule({
   declarations: [
@@ -51,11 +51,11 @@ import {
 
     // Material Components
     FlexLayoutModule,
-    MdButtonModule,
-    MdCardModule,
-    MdDialogModule,
-    MdIconModule,
-    MdSliderModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatIconModule,
+    MatSliderModule,
   ],
   providers: [
     CustomCompileService,

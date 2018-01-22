@@ -1,4 +1,3 @@
-/// <reference path="./typings/drmonty-leaflet-awesome-markers.d.ts"/>
 import 'hammerjs';
 
 import { enableProdMode } from '@angular/core';
