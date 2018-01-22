@@ -19,7 +19,7 @@ interface ChartData {
 }
 
 @Component({
-  selector: 'chart',
+  selector: 'app-chart',
   templateUrl: 'chart.html',
   styleUrls: ['chart.css'],
 })
@@ -30,7 +30,7 @@ export class ChartComponent {
 }
 
 @Component({
-  selector: 'plottable',
+  selector: 'app-plottable',
   template: `
     <div
         id="plot"
@@ -38,7 +38,7 @@ export class ChartComponent {
     </div>
     <div><span>{{hoverPeak}}</span></div>`,
 })
-export class PlottablePlot {
+export class PlottablePlotComponent {
   @Input('orig-data') set origData(data: { name: number, value: number }[]) {
     this.origDataSet.data(data);
     this.xScale.domainMin(0);

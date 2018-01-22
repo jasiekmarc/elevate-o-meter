@@ -1,8 +1,8 @@
 <div fxFlex="70" class="plot-wrapper">
   <div fxFlex [hidden]="trackService.alts==null">
-    <plottable [orig-data]="trackService.altsChartData" [comp-data]="trackService.compChartData" [range-flags]="[layerService.rangeBe, layerService.rangeEn]"
+    <app-plottable [orig-data]="trackService.altsChartData" [comp-data]="trackService.compChartData" [range-flags]="[layerService.rangeBe, layerService.rangeEn]"
       [hover-peak]="layerService.hoveredPeakMarker">
-    </plottable>
+    </app-plottable>
   </div>
 </div>
 <div fxFlex="30" id="counter" [class]="trackService.alts==null ? 'nodisplay' : ''">

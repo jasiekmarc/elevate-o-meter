@@ -20,10 +20,10 @@ import { AppComponent } from './app.component';
 import { MapComponent } from '../components/map/map';
 import {
   JoystickComponent,
-  FileUploadErrorDialog,
-  GpxParseErrorDialog
+  FileUploadErrorDialogComponent,
+  GpxParseErrorDialogComponent
 } from '../components/joystick/joystick';
-import { ChartComponent, PlottablePlot } from '../components/chart/chart';
+import { ChartComponent, PlottablePlotComponent } from '../components/chart/chart';
 
 import { TrackService } from '../providers/track.state';
 import {
@@ -37,10 +37,10 @@ import {
     AppComponent,
     MapComponent,
     JoystickComponent,
-    PlottablePlot,
+    PlottablePlotComponent,
     ChartComponent,
-    FileUploadErrorDialog,
-    GpxParseErrorDialog,
+    FileUploadErrorDialogComponent,
+    GpxParseErrorDialogComponent,
     PeakPopupComponent
   ],
   imports: [
@@ -67,8 +67,8 @@ import {
     MapComponent
   ],
   entryComponents: [
-    FileUploadErrorDialog,
-    GpxParseErrorDialog,
+    FileUploadErrorDialogComponent,
+    GpxParseErrorDialogComponent,
     PeakPopupComponent,
   ]
 })

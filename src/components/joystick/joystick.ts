@@ -65,7 +65,7 @@ export class JoystickComponent implements OnInit {
   selectUploadedTrack(event) {
     const fileList: FileList = event.target.files;
     if (fileList.length !== 1) {
-      this.dialog.open(FileUploadErrorDialog);
+      this.dialog.open(FileUploadErrorDialogComponent);
     }
     const reader = new FileReader();
     reader.onload = (e: FileReaderEvent) => {
@@ -75,7 +75,7 @@ export class JoystickComponent implements OnInit {
         tj.gpx(gpxTree);
       console.log(geoJson);
       if (geoJson.features.length === 0) {
-        this.dialog.open(GpxParseErrorDialog);
+        this.dialog.open(GpxParseErrorDialogComponent);
       }
       this.trackService.loadTrack(geoJson.features[0]);
       this.layerService.loadTrack(geoJson.features[0]);
@@ -88,13 +88,11 @@ export class JoystickComponent implements OnInit {
 }
 
 @Component({
-  selector: 'file-upload-error-dialog',
   template: '<p>Uploading the GPX file failed.</p>'
 })
-export class FileUploadErrorDialog { }
+export class FileUploadErrorDialogComponent { }
 
 @Component({
-  selector: 'gpx-parse-error-dialog',
   template: '<p>The GPX file parsing did not succeed.</p>'
 })
-export class GpxParseErrorDialog { }
+export class GpxParseErrorDialogComponent { }
