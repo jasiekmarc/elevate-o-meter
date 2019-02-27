@@ -4,6 +4,8 @@ import { TrackService } from '../../providers/track.state';
 import { LayerService } from '../../providers/layer.service';
 import * as L from 'leaflet';
 
+const token = 'pk.eyJ1IjoiamFzaWVrbWFyYyIsImEiOiJ6c3JfeENVIn0.tl9wzuRmikzx4aL8q-x_3w';
+
 @Component({
   selector: 'map',
   template: `<div
@@ -17,10 +19,9 @@ import * as L from 'leaflet';
 export class MapComponent {
   options = {
     layers: [
-      L.tileLayer('https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token={token}', {
+      L.tileLayer(`https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=${token}`, {
         maxZoom: 18,
         attribution: '<a href="http://mapbox.com">Mapbox</a>',
-        token: 'pk.eyJ1IjoiamFzaWVrbWFyYyIsImEiOiJ6c3JfeENVIn0.tl9wzuRmikzx4aL8q-x_3w',
       })
     ],
     zoom: 5,
@@ -29,10 +30,9 @@ export class MapComponent {
 
   layersControl = {
     baseLayers: {
-      'Mapbox Outdoors': L.tileLayer('https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token={token}', {
+      'Mapbox Outdoors': L.tileLayer(`https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=${token}`, {
         maxZoom: 18,
         attribution: '<a href="http://mapbox.com">Mapbox</a>',
-        token: 'pk.eyJ1IjoiamFzaWVrbWFyYyIsImEiOiJ6c3JfeENVIn0.tl9wzuRmikzx4aL8q-x_3w'
       }),
       'Hike & Bike': L.tileLayer('http://{s}.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png', {
         maxZoom: 18,

@@ -7,15 +7,6 @@ import * as L from 'leaflet';
 import { TrackService } from '../../providers/track.state';
 import { LayerService } from '../../providers/layer.service';
 
-interface FileReaderEventTarget extends EventTarget {
-  result: string;
-}
-
-interface FileReaderEvent extends Event {
-  target: FileReaderEventTarget;
-  getMessage(): string;
-}
-
 class AddPeakModel {
   constructor(
     public be: number,
@@ -68,8 +59,8 @@ export class JoystickComponent implements OnInit {
       this.dialog.open(FileUploadErrorDialogComponent);
     }
     const reader = new FileReader();
-    reader.onload = (e: FileReaderEvent) => {
-      const gpxText = e.target.result;
+    reader.onload = () => {
+      const gpxText = <string>reader.result;
       const gpxTree = new DOMParser().parseFromString(gpxText, 'text/xml');
       const geoJson: GeoJSON.FeatureCollection<GeoJSON.LineString> =
         tj.gpx(gpxTree);
