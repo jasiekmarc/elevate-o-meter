@@ -13,7 +13,7 @@ import 'leaflet-providers';
         [leafletLayers]="layerService.layers"
         [leafletLayersControl]="layersControl"
         [leafletFitBounds]="layerService.fitBounds"></div>`,
-  styles: ['div { height: 66vh; }'],
+  styles: ['div { height: 100%; width: 100%; }'],
 })
 export class MapComponent {
   topoMap = L.tileLayer.provider('OpenTopoMap');
