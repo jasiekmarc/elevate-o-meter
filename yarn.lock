@@ -1590,6 +1590,13 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.9.tgz"
   integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
 
+"@types/leaflet-providers@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@types/leaflet-providers/-/leaflet-providers-1.2.1.tgz#620669b828959740a2d8572e0c0288a2382d3564"
+  integrity sha512-uNyuXiNV2q3fmgNjQji2P6RjQISmL40bbOL91/3OAwiE3XhkLKPmSAtAcfe11MAIz45iEjdFZJWppq9QyfnPIw==
+  dependencies:
+    "@types/leaflet" "*"
+
 "@types/leaflet.awesome-markers@^2.0.25":
   version "2.0.25"
   resolved "https://registry.npmjs.org/@types/leaflet.awesome-markers/-/leaflet.awesome-markers-2.0.25.tgz"
@@ -4305,6 +4312,11 @@ klona@^2.0.4, klona@^2.0.5:
   version "2.0.5"
   resolved "https://registry.npmjs.org/klona/-/klona-2.0.5.tgz"
   integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
+
+leaflet-providers@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/leaflet-providers/-/leaflet-providers-1.13.0.tgz#10c843a23d5823a65096d40ad53f27029e13434b"
+  integrity sha512-f/sN5wdgBbVA2jcCYzScIfYNxKdn2wBJP9bu+5cRX9Xj6g8Bt1G9Sr8WgJAt/ckIFIc3LVVxCBNFpSCfTuUElg==
 
 leaflet.awesome-markers@^2.0.5:
   version "2.0.5"
