@@ -1,6 +1,5 @@
 import { Component, ApplicationRef, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import * as tj from '@mapbox/togeojson';
 import * as L from 'leaflet';
 
@@ -15,7 +14,7 @@ class AddPeakModel {
 }
 
 @Component({
-  selector: 'joystick',
+  selector: 'app-joystick',
   templateUrl: 'joystick.html',
   styleUrls: ['joystick.css'],
 })

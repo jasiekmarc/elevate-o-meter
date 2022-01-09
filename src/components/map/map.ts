@@ -7,7 +7,7 @@ import * as L from 'leaflet';
 const token = 'pk.eyJ1IjoiamFzaWVrbWFyYyIsImEiOiJ6c3JfeENVIn0.tl9wzuRmikzx4aL8q-x_3w';
 
 @Component({
-  selector: 'map',
+  selector: 'app-map',
   template: `<div
         leaflet
         [leafletOptions]="options"

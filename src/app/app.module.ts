@@ -7,13 +7,11 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatDialogModule,
-  MatIconModule,
-  MatSliderModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 import { AppComponent } from './app.component';
@@ -47,7 +45,7 @@ import {
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    LeafletModule.forRoot(),
+    LeafletModule,
 
     // Material Components
     FlexLayoutModule,
